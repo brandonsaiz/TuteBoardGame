@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://d3ki1yy0fwg72"]
+
+[ext_resource type="Texture2D" uid="uid://bh5s117387hb5" path="res://Art/dice.png" id="1_onsuw"]
+[ext_resource type="Script" path="res://Scripts/Dice.gd" id="2_hwy7e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdyp1"]
+atlas = ExtResource("1_onsuw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrytc"]
+atlas = ExtResource("1_onsuw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hkh8"]
+atlas = ExtResource("1_onsuw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwxld"]
+atlas = ExtResource("1_onsuw")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdnji"]
+atlas = ExtResource("1_onsuw")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ccp4"]
+atlas = ExtResource("1_onsuw")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x1pnp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdyp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrytc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hkh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwxld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdnji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ccp4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[node name="Dice" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_x1pnp")
+frame = 1
+frame_progress = 0.00135594
+script = ExtResource("2_hwy7e")
+
+[node name="rollTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="rollCamera" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(3, 3)
+
+[connection signal="timeout" from="rollTimer" to="." method="_on_roll_timer_timeout"]

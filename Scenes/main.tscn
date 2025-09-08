@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dc8l85x01xsju"]
+
+[ext_resource type="Texture2D" uid="uid://b3aqbfwdc6tly" path="res://Art/board with question marks.png" id="1_4nj3e"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_ccjf1"]
+[ext_resource type="PackedScene" uid="uid://d3ki1yy0fwg72" path="res://Scenes/dice.tscn" id="2_535dj"]
+[ext_resource type="Texture2D" uid="uid://cm2boonoy7ija" path="res://Art/blue piece.png" id="3_bw44p"]
+[ext_resource type="Texture2D" uid="uid://c3vmdjarj662x" path="res://Art/pink piece.png" id="4_ibtm6"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ccjf1")
+
+[node name="GameBoard" type="Sprite2D" parent="."]
+position = Vector2(639, 365)
+scale = Vector2(1.98438, 1.97778)
+texture = ExtResource("1_4nj3e")
+
+[node name="Space1" type="Marker2D" parent="GameBoard"]
+position = Vector2(-257.511, -22.7528)
+
+[node name="Space2" type="Marker2D" parent="GameBoard"]
+position = Vector2(-193.007, -22.7528)
+
+[node name="Space3" type="Marker2D" parent="GameBoard"]
+position = Vector2(-128.504, -22.7528)
+
+[node name="Space4" type="Marker2D" parent="GameBoard"]
+position = Vector2(-63.9998, -22.7528)
+
+[node name="Space5" type="Marker2D" parent="GameBoard"]
+position = Vector2(0.503967, -22.7528)
+
+[node name="Space6" type="Marker2D" parent="GameBoard"]
+position = Vector2(65.0077, -22.7528)
+
+[node name="Dice" parent="." instance=ExtResource("2_535dj")]
+position = Vector2(1024.37, 142.113)
+scale = Vector2(1.98438, 1.97778)
+
+[node name="PlayerOne" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(128, 288)
+scale = Vector2(2, 2)
+texture = ExtResource("3_bw44p")
+
+[node name="PlayerTwo" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(128, 352)
+scale = Vector2(2, 2)
+texture = ExtResource("4_ibtm6")
