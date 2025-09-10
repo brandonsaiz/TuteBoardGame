@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc8l85x01xsju"]
+[gd_scene load_steps=9 format=3 uid="uid://dc8l85x01xsju"]
 
 [ext_resource type="Texture2D" uid="uid://b3aqbfwdc6tly" path="res://Art/board with question marks.png" id="1_4nj3e"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_ccjf1"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/Space.gd" id="3_6i2ct"]
 [ext_resource type="Texture2D" uid="uid://cm2boonoy7ija" path="res://Art/blue piece.png" id="3_bw44p"]
 [ext_resource type="Texture2D" uid="uid://c3vmdjarj662x" path="res://Art/pink piece.png" id="4_ibtm6"]
+[ext_resource type="Theme" uid="uid://dkeqhsnkx3w0s" path="res://Art/DefaultTheme.tres" id="7_t04r5"]
+[ext_resource type="PackedScene" uid="uid://c04fqfntkimir" path="res://Scenes/question_box.tscn" id="8_ney8r"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ccjf1")
@@ -114,5 +116,44 @@ texture = ExtResource("4_ibtm6")
 
 [node name="EndTurnTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="MovementTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="ActionTimer" type="Timer" parent="."]
+wait_time = 1.8
+one_shot = true
+
+[node name="ActionLabelCtr" type="PanelContainer" parent="."]
+offset_left = 256.0
+offset_top = 96.0
+offset_right = 768.0
+offset_bottom = 192.0
+theme = ExtResource("7_t04r5")
+
+[node name="CenterContainer" type="CenterContainer" parent="ActionLabelCtr"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ActionLabelCtr/CenterContainer"]
+layout_mode = 2
+theme = ExtResource("7_t04r5")
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="ActionLabel" type="Label" parent="ActionLabelCtr/CenterContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("7_t04r5")
+theme_type_variation = &"HeaderLarge"
+text = "Player One, Roll!"
+vertical_alignment = 1
+
+[node name="QuestionBox" parent="." instance=ExtResource("8_ney8r")]
+offset_left = 408.0
+offset_top = 408.0
+offset_right = 910.0
+offset_bottom = 483.0
 
 [connection signal="timeout" from="EndTurnTimer" to="." method="_on_turn_ended"]

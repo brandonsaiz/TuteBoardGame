@@ -5,6 +5,10 @@ extends Node2D
 @onready var player_one = $PlayerOne
 @onready var player_two = $PlayerTwo
 @onready var end_turn_timer = $EndTurnTimer
+@onready var movement_timer = $MovementTimer
+@onready var action_timer = $ActionTimer
+@onready var action_label = $ActionLabelCtr/CenterContainer/MarginContainer/ActionLabel
+@onready var action_label_ctr = $ActionLabelCtr
 
 @export var token_offset : Vector2 = Vector2(0.0, 32.0)
 var game_board_spots : Array
@@ -31,7 +35,7 @@ func _process(_delta) -> void:
 	if roll_complete:
 		roll_complete = false
 ############## DEBUG MOVEMENT ##############
-#		result = 6
+		result = 6
 ############################################
 		print(str(result))
 		move_player()
@@ -68,35 +72,55 @@ func move_player():
 		var tween = create_tween()
 		tween.tween_property(current_player, "global_position",\
 				game_board_spots[next_spot].global_position + token_offset, 0.8)
-		await tween.finished
+		await tween.finished		
+		movement_timer.start()
+		if !movement_timer.is_stopped():
+			await movement_timer.timeout
+		
 		landing_space = game_board_spots[next_spot].type
+	action_timer.start()
+	
+	action_label_ctr.visible = true
 	match landing_space:
 		SpaceType.type.REGULAR:
-			print("regular-ass space")
+			action_label.text = "Ready next player..."
 			end_turn_timer.start()
 			return
 		SpaceType.type.QUESTION:
+			action_label.text = "Answer the Question!"
 			print("question")
 			return
 		SpaceType.type.BACKWARD:
-			print("backwards")
+			action_timer.start()
+			action_label.text = "Move back 2 Spaces!"
 			result = -2
+			if !action_timer.is_stopped():
+				await action_timer.timeout
 			move_player()
 			return
 		SpaceType.type.FORWARD:
-			print("forwards")
+			action_timer.start()
+			action_label.text = "Move forward 2 Spaces!"
 			result = 2
+			if !action_timer.is_stopped():
+				await action_timer.timeout
 			move_player()
 			return
 		SpaceType.type.FINISH:
+			action_timer.start()
+			action_label.text = "Finished!"
 			end_turn_timer.start()
 			print("end")
 		
 func _on_turn_ended():
 	roll_ready = true
 	p_one_turn = !p_one_turn
+	if p_one_turn: action_label.text = "Roll Player One"
+	else: action_label.text = "Roll Player Two"
+	action_label_ctr.visible = true
 	
 func _roll_complete():
+	action_label_ctr.visible = false
 	roll_complete = true
 #	just used to test 
 #	roll_ready = true
