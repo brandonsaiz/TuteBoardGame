@@ -35,7 +35,7 @@ func _process(_delta) -> void:
 	if roll_complete:
 		roll_complete = false
 ############## DEBUG MOVEMENT ##############
-		result = 6
+		result = 11
 ############################################
 		print(str(result))
 		move_player()
@@ -55,7 +55,11 @@ func move_player():
 		final_spot = p_two_spot + result
 	
 	if final_spot > game_board_spots.size()-1:
-		print("fuuuuck")
+		action_timer.start()	
+		action_label_ctr.visible = true
+		action_label.text = "Too far!"
+		if !action_timer.is_stopped():
+			await action_timer.timeout
 		end_turn_timer.start()
 		return
 		
@@ -78,8 +82,7 @@ func move_player():
 			await movement_timer.timeout
 		
 		landing_space = game_board_spots[next_spot].type
-	action_timer.start()
-	
+	action_timer.start()	
 	action_label_ctr.visible = true
 	match landing_space:
 		SpaceType.type.REGULAR:
