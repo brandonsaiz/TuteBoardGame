@@ -111,3 +111,8 @@ texture_filter = 1
 position = Vector2(128, 352)
 scale = Vector2(2, 2)
 texture = ExtResource("4_ibtm6")
+
+[node name="EndTurnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="EndTurnTimer" to="." method="_on_turn_ended"]

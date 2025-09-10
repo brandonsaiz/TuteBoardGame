@@ -4,6 +4,7 @@ extends Node2D
 @onready var dice = $Dice as Dice
 @onready var player_one = $PlayerOne
 @onready var player_two = $PlayerTwo
+@onready var end_turn_timer = $EndTurnTimer
 
 @export var token_offset : Vector2 = Vector2(0.0, 32.0)
 var game_board_spots : Array
@@ -29,8 +30,9 @@ func _input(_event) -> void:
 func _process(_delta) -> void:
 	if roll_complete:
 		roll_complete = false
-		
-		result = 5
+############## DEBUG MOVEMENT ##############
+#		result = 6
+############################################
 		print(str(result))
 		move_player()
 		
@@ -50,8 +52,7 @@ func move_player():
 	
 	if final_spot > game_board_spots.size()-1:
 		print("fuuuuck")
-		p_one_turn = !p_one_turn
-		roll_ready = true
+		end_turn_timer.start()
 		return
 		
 	while spaces != result:
@@ -72,8 +73,7 @@ func move_player():
 	match landing_space:
 		SpaceType.type.REGULAR:
 			print("regular-ass space")
-			p_one_turn = !p_one_turn
-			roll_ready = true
+			end_turn_timer.start()
 			return
 		SpaceType.type.QUESTION:
 			print("question")
@@ -89,9 +89,12 @@ func move_player():
 			move_player()
 			return
 		SpaceType.type.FINISH:
+			end_turn_timer.start()
 			print("end")
 		
-		
+func _on_turn_ended():
+	roll_ready = true
+	p_one_turn = !p_one_turn
 	
 func _roll_complete():
 	roll_complete = true
