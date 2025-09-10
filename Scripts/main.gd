@@ -10,6 +10,7 @@ extends Node2D
 @onready var action_label = $ActionLabelCtr/CenterContainer/MarginContainer/ActionLabel
 @onready var action_label_ctr = $ActionLabelCtr
 
+@export var question_box : PackedScene
 @export var token_offset : Vector2 = Vector2(0.0, 32.0)
 var game_board_spots : Array
 
@@ -35,7 +36,7 @@ func _process(_delta) -> void:
 	if roll_complete:
 		roll_complete = false
 ############## DEBUG MOVEMENT ##############
-		result = 11
+		result = 12
 ############################################
 		print(str(result))
 		move_player()
@@ -91,7 +92,8 @@ func move_player():
 			return
 		SpaceType.type.QUESTION:
 			action_label.text = "Answer the Question!"
-			print("question")
+			var question = question_box.instantiate()
+			add_child(question)
 			return
 		SpaceType.type.BACKWARD:
 			action_timer.start()
