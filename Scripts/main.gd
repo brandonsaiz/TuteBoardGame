@@ -36,7 +36,7 @@ func _process(_delta) -> void:
 	if roll_complete:
 		roll_complete = false
 ############## DEBUG MOVEMENT ##############
-		result = 12
+		result = 6
 ############################################
 		print(str(result))
 		move_player()
@@ -93,7 +93,11 @@ func move_player():
 		SpaceType.type.QUESTION:
 			action_label.text = "Answer the Question!"
 			var question = question_box.instantiate()
+			question.connect("answered", _on_question_answered)
 			add_child(question)
+			if !action_timer.is_stopped():
+				await action_timer.timeout
+			end_turn_timer.start()
 			return
 		SpaceType.type.BACKWARD:
 			action_timer.start()
@@ -129,3 +133,13 @@ func _roll_complete():
 	roll_complete = true
 #	just used to test 
 #	roll_ready = true
+
+func _on_question_answered(correct : bool):
+	var player
+	var right_or_wrong
+	if correct: right_or_wrong = "correctly!"
+	else: right_or_wrong = "incorrectly!"
+	if p_one_turn: player = "player 1 "
+	else: player = "player 2 "
+	action_label.text = player + "answered " + right_or_wrong
+	action_timer.start()
