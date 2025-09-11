@@ -9,23 +9,32 @@ extends Node2D
 @onready var action_timer = $ActionTimer
 @onready var action_label = $ActionLabelCtr/CenterContainer/MarginContainer/ActionLabel
 @onready var action_label_ctr = $ActionLabelCtr
+@onready var score_one_label = $ScoreCtr/MarginContainer/VBoxContainer/ScoreOneLabel
+@onready var score_two_label = $ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
 
 @export var question_box : PackedScene
 @export var token_offset : Vector2 = Vector2(0.0, 32.0)
-var game_board_spots : Array
 
+var game_board_spots : Array
 var p_one_turn : bool = true
 var roll_complete : bool = false
 var roll_ready : bool = true
 var p_one_spot : int = 0
 var p_two_spot : int = 0
 var result : int
+var p_one_score : int = 0
+var p_two_score : int = 0
+var score_words_one : String = "Player One Score: "
+var score_words_two : String = "Player Two Score: "
+
 
 func _ready() -> void:
 	dice.roll_complete.connect(_roll_complete)
 	game_board_spots = game_board.get_children() as Array[Space]
 	player_one.global_position = game_board_spots[0].global_position - token_offset
 	player_two.global_position = game_board_spots[0].global_position + token_offset
+	score_one_label.text = score_words_one + str(p_one_score)
+	score_two_label.text = score_words_two + str(p_two_score)
 
 func _input(_event) -> void:
 	if Input.is_action_just_pressed("ui_accept") && roll_ready:
@@ -123,6 +132,10 @@ func ask_question():
 		question.connect("answered", _on_question_answered)
 		add_child(question)
 		
+func update_score():
+	score_one_label.text = score_words_one + str(p_one_score)
+	score_two_label.text = score_words_two + str(p_two_score)
+		
 func _on_turn_ended():
 	roll_ready = true
 	p_one_turn = !p_one_turn
@@ -139,12 +152,21 @@ func _roll_complete():
 func _on_question_answered(correct : bool):
 	var player
 	var right_or_wrong
+	var score = 10
 	if correct: right_or_wrong = "correctly!"
-	else: right_or_wrong = "incorrectly!"
-	if p_one_turn: player = "player 1 "
-	else: player = "player 2 "
+	else: 
+		right_or_wrong = "incorrectly!"
+		score = 0
+	if p_one_turn: 
+		player = "player 1 "
+		p_one_score += score
+	else: 
+		player = "player 2 "
+		p_two_score += score
 	action_label.text = player + "answered " + right_or_wrong
 	action_timer.start()
+	update_score()
 	if !action_timer.is_stopped():
 		await action_timer.timeout
 	end_turn_timer.start()
+	

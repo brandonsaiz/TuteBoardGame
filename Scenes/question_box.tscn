@@ -16,7 +16,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_l5bpj")
 script = ExtResource("2_8pnk5")
-left_button_correct = true
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

@@ -127,9 +127,9 @@ wait_time = 1.8
 one_shot = true
 
 [node name="ActionLabelCtr" type="PanelContainer" parent="."]
-offset_left = 256.0
+offset_left = 352.0
 offset_top = 96.0
-offset_right = 768.0
+offset_right = 792.0
 offset_bottom = 192.0
 theme = ExtResource("7_t04r5")
 
@@ -150,5 +150,29 @@ theme = ExtResource("7_t04r5")
 theme_type_variation = &"HeaderLarge"
 text = "Player One, Roll!"
 vertical_alignment = 1
+
+[node name="ScoreCtr" type="PanelContainer" parent="."]
+offset_left = 88.0
+offset_top = 96.0
+offset_right = 312.0
+offset_bottom = 193.0
+theme = ExtResource("7_t04r5")
+
+[node name="MarginContainer" type="MarginContainer" parent="ScoreCtr"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScoreCtr/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ScoreOneLabel" type="Label" parent="ScoreCtr/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScoreTwoLabel" type="Label" parent="ScoreCtr/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [connection signal="timeout" from="EndTurnTimer" to="." method="_on_turn_ended"]
