@@ -91,13 +91,9 @@ func move_player():
 			end_turn_timer.start()
 			return
 		SpaceType.type.QUESTION:
-			action_label.text = "Answer the Question!"
-			var question = question_box.instantiate()
-			question.connect("answered", _on_question_answered)
-			add_child(question)
+			ask_question()
 			if !action_timer.is_stopped():
 				await action_timer.timeout
-			end_turn_timer.start()
 			return
 		SpaceType.type.BACKWARD:
 			action_timer.start()
@@ -120,6 +116,12 @@ func move_player():
 			action_label.text = "Finished!"
 			end_turn_timer.start()
 			print("end")
+			
+func ask_question():
+		action_label.text = "Answer the Question!"
+		var question = question_box.instantiate()
+		question.connect("answered", _on_question_answered)
+		add_child(question)
 		
 func _on_turn_ended():
 	roll_ready = true
@@ -143,3 +145,6 @@ func _on_question_answered(correct : bool):
 	else: player = "player 2 "
 	action_label.text = player + "answered " + right_or_wrong
 	action_timer.start()
+	if !action_timer.is_stopped():
+		await action_timer.timeout
+	end_turn_timer.start()
