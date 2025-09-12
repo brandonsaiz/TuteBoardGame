@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c04fqfntkimir" path="res://Scenes/question_box.tscn" id="8_ney8r"]
 
 [node name="Main" type="Node2D"]
+position = Vector2(1, 0)
 script = ExtResource("1_ccjf1")
 question_box = ExtResource("8_ney8r")
 
