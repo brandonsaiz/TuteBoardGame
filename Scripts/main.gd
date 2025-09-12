@@ -12,7 +12,7 @@ extends Node2D
 @onready var score_one_label = $ScoreCtr/MarginContainer/VBoxContainer/ScoreOneLabel
 @onready var score_two_label = $ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
 
-@export var question_box : PackedScene
+@export var question_boxes : Array[PackedScene]
 @export var token_offset : Vector2 = Vector2(0.0, 32.0)
 
 var game_board_spots : Array
@@ -128,7 +128,12 @@ func move_player():
 			
 func ask_question():
 		action_label.text = "Answer the Question!"
+		question_boxes.shuffle()
+		print("size of question_boxes: " + str(question_boxes.size()))
+		var question_box = question_boxes.front()
+		print(str(question_box))
 		var question = question_box.instantiate()
+		print(str(question))
 		question.connect("answered", _on_question_answered)
 		add_child(question)
 		

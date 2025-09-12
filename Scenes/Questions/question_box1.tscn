@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdu6nh1wn0xqi"]
+
+[ext_resource type="PackedScene" uid="uid://c04fqfntkimir" path="res://Scenes/question_box.tscn" id="1_83jwg"]
+
+[node name="QuestionBox" instance=ExtResource("1_83jwg")]
+left_button_correct = true
+
+[node name="Question" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "Is this the fourth time i've done this tutorial?"

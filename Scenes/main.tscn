@@ -1,18 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://dc8l85x01xsju"]
+[gd_scene load_steps=11 format=3 uid="uid://dc8l85x01xsju"]
 
 [ext_resource type="Texture2D" uid="uid://b3aqbfwdc6tly" path="res://Art/board with question marks.png" id="1_4nj3e"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_ccjf1"]
+[ext_resource type="PackedScene" uid="uid://bdu6nh1wn0xqi" path="res://Scenes/Questions/question_box1.tscn" id="2_43use"]
 [ext_resource type="PackedScene" uid="uid://d3ki1yy0fwg72" path="res://Scenes/dice.tscn" id="2_535dj"]
 [ext_resource type="Script" path="res://Scripts/Space.gd" id="3_6i2ct"]
 [ext_resource type="Texture2D" uid="uid://cm2boonoy7ija" path="res://Art/blue piece.png" id="3_bw44p"]
+[ext_resource type="PackedScene" uid="uid://dsdwndfv3ppgg" path="res://Scenes/Questions/question_box2.tscn" id="3_isfie"]
+[ext_resource type="PackedScene" uid="uid://booo01lm8i3p2" path="res://Scenes/Questions/question_box3.tscn" id="4_gdupf"]
 [ext_resource type="Texture2D" uid="uid://c3vmdjarj662x" path="res://Art/pink piece.png" id="4_ibtm6"]
 [ext_resource type="Theme" uid="uid://dkeqhsnkx3w0s" path="res://Art/DefaultTheme.tres" id="7_t04r5"]
-[ext_resource type="PackedScene" uid="uid://c04fqfntkimir" path="res://Scenes/question_box.tscn" id="8_ney8r"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(1, 0)
 script = ExtResource("1_ccjf1")
-question_box = ExtResource("8_ney8r")
+question_boxes = Array[PackedScene]([ExtResource("3_isfie"), ExtResource("4_gdupf"), ExtResource("2_43use")])
 
 [node name="GameBoard" type="Sprite2D" parent="."]
 position = Vector2(639, 365)

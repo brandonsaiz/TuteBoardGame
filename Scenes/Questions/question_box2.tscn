@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dsdwndfv3ppgg"]
+
+[node name="QuestionBox"]
+
+[node name="Question" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "Is Alaska 3 or 4 time zones from the East Coast"
+
+[node name="LeftButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+text = "3"
+
+[node name="RightButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+text = "4"
