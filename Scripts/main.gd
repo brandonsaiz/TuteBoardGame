@@ -12,8 +12,9 @@ extends Node2D
 @onready var action_label = $CanvasLayer/ActionLabelCtr/CenterContainer/MarginContainer/ActionLabel
 @onready var score_one_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreOneLabel
 @onready var score_two_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
-@onready var winner_screen = $"CanvasLayer/Winner Screen"
+@onready var winner_screen = $"CanvasLayer/Winner Screen" as WinnerScreen
 
+@export var debug: bool = false
 @export var question_boxes : Array[PackedScene]
 @export var token_offset : Vector2 = Vector2(0.0, 32.0)
 
@@ -26,6 +27,8 @@ var p_two_spot : int = 0
 var result : int
 var p_one_score : int = 0
 var p_two_score : int = 0
+var p_one_done : bool = false
+var p_two_done : bool = false
 var score_words_one : String = "Player One Score: "
 var score_words_two : String = "Player Two Score: "
 
@@ -47,7 +50,8 @@ func _process(_delta) -> void:
 	if roll_complete:
 		roll_complete = false
 ############## DEBUG MOVEMENT ##############
-		result = 6
+		if debug:
+			result = 6
 ############################################
 		print(str(result))
 		move_player()
@@ -85,9 +89,14 @@ func move_player():
 		else:
 			p_two_spot += 1 * signi(result)
 			next_spot = p_two_spot
+		var token_speed = 0.8
+		############### DEBUG MOVE SPEED#####################
+		if debug:
+			token_speed = 0.001
+		#####################################################
 		var tween = create_tween()
 		tween.tween_property(current_player, "global_position",\
-				game_board_spots[next_spot].global_position + token_offset, 0.8)
+				game_board_spots[next_spot].global_position + token_offset, token_speed)
 		await tween.finished		
 		movement_timer.start()
 		if !movement_timer.is_stopped():
@@ -123,10 +132,13 @@ func move_player():
 			move_player()
 			return
 		SpaceType.type.FINISH:
+			if p_one_turn: p_one_done = true
+			else: p_two_done = true
 			action_timer.start()
 			action_label.text = "Finished!"
 			end_turn_timer.start()
-			print("end")
+#			print("p1 done: " + str(p_one_done))
+#			print("p2 done: " + str(p_two_done))
 			
 func ask_question():
 		action_label.text = "Answer the Question!"
@@ -142,8 +154,15 @@ func ask_question():
 func update_score():
 	score_one_label.text = score_words_one + str(p_one_score)
 	score_two_label.text = score_words_two + str(p_two_score)
+
+func _end_game():
+	var winner: bool = p_one_score > p_two_score
+	winner_screen.set_winner(winner)
 		
 func _on_turn_ended():
+	if p_one_done and p_two_done:
+		_end_game()
+		return
 	roll_ready = true
 	p_one_turn = !p_one_turn
 	if p_one_turn: action_label.text = "Roll Player One"

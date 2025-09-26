@@ -15,6 +15,7 @@
 [node name="Main" type="Node2D"]
 position = Vector2(1, 0)
 script = ExtResource("1_ccjf1")
+debug = true
 question_boxes = Array[PackedScene]([ExtResource("2_0t1mw"), ExtResource("3_isfie"), ExtResource("4_gdupf")])
 
 [node name="GameBoard" type="Sprite2D" parent="."]
