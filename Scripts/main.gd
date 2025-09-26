@@ -47,7 +47,7 @@ func _process(_delta) -> void:
 	if roll_complete:
 		roll_complete = false
 ############## DEBUG MOVEMENT ##############
-#		result = 6
+		result = 6
 ############################################
 		print(str(result))
 		move_player()
