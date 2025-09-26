@@ -1,9 +1,11 @@
-[gd_scene format=3 uid="uid://dsdwndfv3ppgg"]
+[gd_scene load_steps=2 format=3 uid="uid://dsdwndfv3ppgg"]
 
-[node name="QuestionBox"]
+[ext_resource type="PackedScene" uid="uid://c04fqfntkimir" path="res://Scenes/Questions/question_box.tscn" id="1_gbd15"]
+
+[node name="QuestionBox" instance=ExtResource("1_gbd15")]
 
 [node name="Question" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
-text = "Is Alaska 3 or 4 time zones from the East Coast"
+text = "Is Alaska 3 or 4 time zones from the East Coast?"
 
 [node name="LeftButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
 text = "3"

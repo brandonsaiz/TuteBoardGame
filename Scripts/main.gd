@@ -7,15 +7,17 @@ extends Node2D
 @onready var end_turn_timer = $EndTurnTimer
 @onready var movement_timer = $MovementTimer
 @onready var action_timer = $ActionTimer
-@onready var action_label = $ActionLabelCtr/CenterContainer/MarginContainer/ActionLabel
-@onready var action_label_ctr = $ActionLabelCtr
-@onready var score_one_label = $ScoreCtr/MarginContainer/VBoxContainer/ScoreOneLabel
-@onready var score_two_label = $ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
+@onready var action_label_ctr = $CanvasLayer/ActionLabelCtr
+@onready var score_ctr = $CanvasLayer/ScoreCtr
+@onready var action_label = $CanvasLayer/ActionLabelCtr/CenterContainer/MarginContainer/ActionLabel
+@onready var score_one_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreOneLabel
+@onready var score_two_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
+@onready var winner_screen = $"CanvasLayer/Winner Screen"
 
 @export var question_boxes : Array[PackedScene]
 @export var token_offset : Vector2 = Vector2(0.0, 32.0)
 
-var game_board_spots : Array
+var game_board_spots : Array 
 var p_one_turn : bool = true
 var roll_complete : bool = false
 var roll_ready : bool = true
@@ -45,7 +47,7 @@ func _process(_delta) -> void:
 	if roll_complete:
 		roll_complete = false
 ############## DEBUG MOVEMENT ##############
-		result = 6
+#		result = 6
 ############################################
 		print(str(result))
 		move_player()

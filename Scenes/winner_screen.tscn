@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://2e66nf3xosom"]
+
+[ext_resource type="Theme" uid="uid://dkeqhsnkx3w0s" path="res://Art/DefaultTheme.tres" id="1_0wofa"]
+[ext_resource type="Texture2D" uid="uid://cm2boonoy7ija" path="res://Art/blue piece.png" id="2_6qe0i"]
+[ext_resource type="Script" path="res://Scripts/winner_screen.gd" id="2_qp83f"]
+
+[node name="Winner Screen" type="CenterContainer"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0wofa")
+script = ExtResource("2_qp83f")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_0wofa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_0wofa")
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_0wofa")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 66
+text = "Hello World!"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_6qe0i")
+stretch_mode = 1

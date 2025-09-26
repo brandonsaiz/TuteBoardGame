@@ -1,4 +1,5 @@
 extends Control
+class_name QuestionBox
 
 @onready var hbox = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer
 @onready var question = $PanelContainer/MarginContainer/VBoxContainer/Question

@@ -1,14 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://booo01lm8i3p2"]
+[gd_scene load_steps=2 format=3 uid="uid://ugsua7yql4l7"]
 
-[ext_resource type="PackedScene" uid="uid://c04fqfntkimir" path="res://Scenes/question_box.tscn" id="1_0ms4v"]
+[ext_resource type="PackedScene" uid="uid://c04fqfntkimir" path="res://Scenes/Questions/question_box.tscn" id="1_0ms4v"]
 
 [node name="QuestionBox" instance=ExtResource("1_0ms4v")]
+left_button_correct = true
 
 [node name="Question" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
 text = "What color theme does the tutorialist like?"
 
 [node name="LeftButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
-text = "Red"
+text = "Purple"
 
 [node name="RightButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
-text = "Purple"
+text = "Red"
