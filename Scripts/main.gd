@@ -156,6 +156,10 @@ func update_score():
 	score_two_label.text = score_words_two + str(p_two_score)
 
 func _end_game():
+	if p_one_score == p_two_score:
+		winner_screen.set_tie()
+		winner_screen.change_text("It's a tie!!!")
+		return
 	var winner: bool = p_one_score > p_two_score
 	winner_screen.set_winner(winner)
 		

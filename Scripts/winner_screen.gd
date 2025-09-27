@@ -6,10 +6,24 @@ class_name  WinnerScreen
 
 var player_one_file: String = "res://Art/blue piece.png"
 var player_two_file: String = "res://Art/pink piece.png"
+var both_file: String = "res://Art/both.png"
 
+func change_text(string: String):
+	label.text = string
+
+func set_tie() -> void:
+	texture_rect.texture = load(both_file)
+	visible = true
 func set_winner(player_one: bool) -> void:
 #	print("did i get here? set winner")
 	if player_one:
+		label.text = "Player One Wins!"
 		texture_rect.texture = load(player_one_file)
-	else: texture_rect.texture = load(player_two_file)
+	else:
+		label.text = "Player Two Wins!" 
+		texture_rect.texture = load(player_two_file)
 	visible = true
+
+
+func _on_button_button_up():
+	get_tree().reload_current_scene()

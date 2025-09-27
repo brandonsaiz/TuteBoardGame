@@ -37,3 +37,17 @@ layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("2_6qe0i")
 stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_0wofa")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Play Again!"
+
+[connection signal="button_up" from="PanelContainer/VBoxContainer/MarginContainer/Button" to="." method="_on_button_button_up"]
