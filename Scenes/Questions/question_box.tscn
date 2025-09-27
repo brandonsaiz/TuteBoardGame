@@ -56,6 +56,8 @@ text = "Nope"
 wait_time = 1.3
 one_shot = true
 
+[node name="questionSoundPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="answered" from="." to="." method="_on_answered"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LeftButton" to="." method="_on_left_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RightButton" to="." method="_on_right_button_pressed"]
