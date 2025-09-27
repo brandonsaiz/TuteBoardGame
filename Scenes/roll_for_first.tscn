@@ -1,8 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://batr2snc4bpc5"]
+[gd_scene load_steps=7 format=3 uid="uid://batr2snc4bpc5"]
 
 [ext_resource type="Theme" uid="uid://dkeqhsnkx3w0s" path="res://Art/DefaultTheme.tres" id="1_cqp24"]
 [ext_resource type="Texture2D" uid="uid://bfro3nt61ljdl" path="res://Art/both.png" id="2_0qw4u"]
 [ext_resource type="Script" path="res://Scripts/roll_for_first.gd" id="2_a4txe"]
+
+[sub_resource type="Animation" id="Animation_bf303"]
+resource_name = "player_flip"
+length = 0.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer/VBoxContainer/TextureRect:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_r4sdi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer/VBoxContainer/TextureRect:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wpial"]
+_data = {
+"RESET": SubResource("Animation_r4sdi"),
+"player_flip": SubResource("Animation_bf303")
+}
 
 [node name="Roll For First" type="CenterContainer"]
 anchors_preset = 15
@@ -30,6 +68,7 @@ vertical_alignment = 1
 layout_mode = 2
 texture = ExtResource("2_0qw4u")
 stretch_mode = 1
+flip_h = true
 
 [node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -37,4 +76,14 @@ theme = ExtResource("1_cqp24")
 text = "Click to select player one!"
 flat = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wpial")
+}
+
+[node name="AnimTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="AnimTimer" to="." method="_on_anim_timer_timeout"]
