@@ -13,7 +13,7 @@ extends Node2D
 @onready var score_one_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreOneLabel
 @onready var score_two_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
 @onready var winner_screen = $"CanvasLayer/Winner Screen" as WinnerScreen
-@onready var roll_for_first = $"Roll For First"
+@onready var roll_for_first = $"Roll For First" as RollForFirst
 
 @export var debug: bool = false
 @export var question_boxes : Array[PackedScene]
@@ -22,7 +22,7 @@ extends Node2D
 var game_board_spots : Array 
 var p_one_turn : bool = true
 var roll_complete : bool = false
-var roll_ready : bool = true
+var roll_ready : bool = false
 var p_one_spot : int = 0
 var p_two_spot : int = 0
 var result : int
@@ -35,6 +35,7 @@ var score_words_two : String = "Player Two Score: "
 
 
 func _ready() -> void:
+	roll_for_first.piece_picked.connect(_start_game)
 	dice.roll_complete.connect(_roll_complete)
 	game_board_spots = game_board.get_children() as Array[Space]
 	player_one.global_position = game_board_spots[0].global_position - token_offset
@@ -156,6 +157,13 @@ func update_score():
 	score_one_label.text = score_words_one + str(p_one_score)
 	score_two_label.text = score_words_two + str(p_two_score)
 
+func _start_game(piece: String):
+	action_timer.start()
+	if !action_timer.is_stopped():
+		await action_timer.timeout
+	roll_for_first.call_deferred("queue_free")
+	roll_ready = true
+	
 func _end_game():
 	if p_one_score == p_two_score:
 		winner_screen.set_tie()

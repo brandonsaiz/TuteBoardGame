@@ -1,4 +1,5 @@
 extends CenterContainer
+class_name RollForFirst
 
 @onready var texture_rect = $PanelContainer/VBoxContainer/TextureRect
 @onready var button = $PanelContainer/VBoxContainer/Button
