@@ -30,8 +30,8 @@ var p_one_score : int = 0
 var p_two_score : int = 0
 var p_one_done : bool = false
 var p_two_done : bool = false
-var score_words_one : String = "Player One Score: "
-var score_words_two : String = "Player Two Score: "
+var score_words_one : String = "Blue - Player One Score: "
+var score_words_two : String = "Pink - Player Two Score: "
 
 
 func _ready() -> void:
@@ -158,10 +158,22 @@ func update_score():
 	score_two_label.text = score_words_two + str(p_two_score)
 
 func _start_game(piece: String):
+	print(piece + " GOES FIRST!")
 	action_timer.start()
+	var pink_tex = load("res://Art/pink piece.png")
+	var blue_tex = load("res://Art/blue piece.png")	
+	if piece == "pink":
+		player_one.texture = pink_tex
+		player_two.texture = blue_tex
+		score_words_one = "Pink - Player One Score: "
+		score_words_two = "Blue - Player Two Score: "
+	score_one_label.text = score_words_one + str(p_one_score)
+	score_two_label.text = score_words_two + str(p_two_score)
+	score_ctr.visible = true
 	if !action_timer.is_stopped():
 		await action_timer.timeout
 	roll_for_first.call_deferred("queue_free")
+	action_label_ctr.visible = true
 	roll_ready = true
 	
 func _end_game():

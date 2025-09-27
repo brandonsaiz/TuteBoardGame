@@ -21,7 +21,10 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_cqp24")
 text = "Let's pick who goes first"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -31,7 +34,7 @@ stretch_mode = 1
 [node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_cqp24")
-text = "Click to roll!"
+text = "Click to select player one!"
 flat = true
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
