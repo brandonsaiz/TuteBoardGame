@@ -3,27 +3,27 @@
 [ext_resource type="Texture2D" uid="uid://bh5s117387hb5" path="res://Art/dice.png" id="1_onsuw"]
 [ext_resource type="Script" path="res://Scripts/Dice.gd" id="2_hwy7e"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sdyp1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa4d1"]
 atlas = ExtResource("1_onsuw")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xrytc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1hdi"]
 atlas = ExtResource("1_onsuw")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4hkh8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0olxr"]
 atlas = ExtResource("1_onsuw")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pwxld"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5jks"]
 atlas = ExtResource("1_onsuw")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hdnji"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dfc8"]
 atlas = ExtResource("1_onsuw")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ccp4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0l20"]
 atlas = ExtResource("1_onsuw")
 region = Rect2(160, 0, 32, 32)
 
@@ -31,22 +31,22 @@ region = Rect2(160, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sdyp1")
+"texture": SubResource("AtlasTexture_sa4d1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xrytc")
+"texture": SubResource("AtlasTexture_d1hdi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4hkh8")
+"texture": SubResource("AtlasTexture_0olxr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pwxld")
+"texture": SubResource("AtlasTexture_n5jks")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hdnji")
+"texture": SubResource("AtlasTexture_2dfc8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8ccp4")
+"texture": SubResource("AtlasTexture_b0l20")
 }],
 "loop": true,
 "name": &"default",
@@ -55,8 +55,6 @@ animations = [{
 
 [node name="Dice" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_x1pnp")
-frame = 1
-frame_progress = 0.00135594
 script = ExtResource("2_hwy7e")
 
 [node name="rollTimer" type="Timer" parent="."]
