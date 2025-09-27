@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://batr2snc4bpc5"]
+
+[ext_resource type="Theme" uid="uid://dkeqhsnkx3w0s" path="res://Art/DefaultTheme.tres" id="1_cqp24"]
+[ext_resource type="Texture2D" uid="uid://bfro3nt61ljdl" path="res://Art/both.png" id="2_0qw4u"]
+[ext_resource type="Script" path="res://Scripts/roll_for_first.gd" id="2_a4txe"]
+
+[node name="Roll For First" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cqp24")
+script = ExtResource("2_a4txe")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Let's pick who goes first"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0qw4u")
+stretch_mode = 1
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_cqp24")
+text = "Click to roll!"
+flat = true
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

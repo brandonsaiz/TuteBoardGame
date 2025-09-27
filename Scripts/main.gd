@@ -2,8 +2,8 @@ extends Node2D
 
 @onready var game_board = $GameBoard
 @onready var dice = $Dice as Dice
-@onready var player_one = $PlayerOne
-@onready var player_two = $PlayerTwo
+@onready var player_one = $PlayerOne as Sprite2D
+@onready var player_two = $PlayerTwo as Sprite2D
 @onready var end_turn_timer = $EndTurnTimer
 @onready var movement_timer = $MovementTimer
 @onready var action_timer = $ActionTimer
@@ -13,6 +13,7 @@ extends Node2D
 @onready var score_one_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreOneLabel
 @onready var score_two_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
 @onready var winner_screen = $"CanvasLayer/Winner Screen" as WinnerScreen
+@onready var roll_for_first = $"Roll For First"
 
 @export var debug: bool = false
 @export var question_boxes : Array[PackedScene]
