@@ -14,6 +14,7 @@ extends Node2D
 @onready var score_two_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
 @onready var winner_screen = $"CanvasLayer/Winner Screen" as WinnerScreen
 @onready var roll_for_first = $"Roll For First" as RollForFirst
+@onready var piece_sound = $PieceSound
 
 @export var debug: bool = false
 @export var question_boxes : Array[PackedScene]
@@ -99,6 +100,7 @@ func move_player():
 		var tween = create_tween()
 		tween.tween_property(current_player, "global_position",\
 				game_board_spots[next_spot].global_position + token_offset, token_speed)
+		tween.finished.connect(piece_sound.play)
 		await tween.finished		
 		movement_timer.start()
 		if !movement_timer.is_stopped():

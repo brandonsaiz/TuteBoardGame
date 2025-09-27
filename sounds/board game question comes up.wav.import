@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b0cxo51rwkcra"
+path="res://.godot/imported/board game question comes up.wav-1f5b48b70d6f1020f0dd048e5e9d19eb.sample"
+
+[deps]
+
+source_file="res://sounds/board game question comes up.wav"
+dest_files=["res://.godot/imported/board game question comes up.wav-1f5b48b70d6f1020f0dd048e5e9d19eb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
