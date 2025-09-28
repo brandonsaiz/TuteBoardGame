@@ -1,60 +1,75 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3ki1yy0fwg72"]
+[gd_scene load_steps=7 format=3 uid="uid://d3ki1yy0fwg72"]
 
 [ext_resource type="Texture2D" uid="uid://bh5s117387hb5" path="res://Art/dice.png" id="1_onsuw"]
 [ext_resource type="Script" path="res://Scripts/Dice.gd" id="2_hwy7e"]
+[ext_resource type="AudioStream" uid="uid://d2tm8a7srb8le" path="res://sounds/board game question dice.wav" id="3_laosa"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sa4d1"]
-atlas = ExtResource("1_onsuw")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="Animation" id="Animation_m5kkk"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 2, 5, 0, 3, 1]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d1hdi"]
-atlas = ExtResource("1_onsuw")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="Animation" id="Animation_yerdf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0olxr"]
-atlas = ExtResource("1_onsuw")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aqmm5"]
+_data = {
+"RESET": SubResource("Animation_yerdf"),
+"default": SubResource("Animation_m5kkk")
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n5jks"]
-atlas = ExtResource("1_onsuw")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2dfc8"]
-atlas = ExtResource("1_onsuw")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b0l20"]
-atlas = ExtResource("1_onsuw")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_x1pnp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sa4d1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d1hdi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0olxr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n5jks")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2dfc8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b0l20")
-}],
-"loop": true,
-"name": &"default",
-"speed": 9.0
-}]
-
-[node name="Dice" type="AnimatedSprite2D"]
-sprite_frames = SubResource("SpriteFrames_x1pnp")
+[node name="Dice" type="Sprite2D"]
+texture = ExtResource("1_onsuw")
+hframes = 6
+frame = 2
 script = ExtResource("2_hwy7e")
 
 [node name="rollTimer" type="Timer" parent="."]
@@ -63,5 +78,14 @@ one_shot = true
 [node name="rollCamera" type="Camera2D" parent="."]
 enabled = false
 zoom = Vector2(3, 3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aqmm5")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_laosa")
+pitch_scale = 0.5
 
 [connection signal="timeout" from="rollTimer" to="." method="_on_roll_timer_timeout"]
