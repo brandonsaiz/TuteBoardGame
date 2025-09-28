@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://5tr5oveevonc"]
+[gd_scene load_steps=16 format=3 uid="uid://5tr5oveevonc"]
 
 [ext_resource type="Texture2D" uid="uid://b3aqbfwdc6tly" path="res://Art/board with question marks.png" id="1_4nj3e"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_ccjf1"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ugsua7yql4l7" path="res://Scenes/Questions/question_box3.tscn" id="4_gdupf"]
 [ext_resource type="Texture2D" uid="uid://c3vmdjarj662x" path="res://Art/pink piece.png" id="4_ibtm6"]
 [ext_resource type="Theme" uid="uid://dkeqhsnkx3w0s" path="res://Art/DefaultTheme.tres" id="7_t04r5"]
+[ext_resource type="PackedScene" uid="uid://cmmtafpmcj6f1" path="res://Scenes/camera.tscn" id="9_p132e"]
 [ext_resource type="PackedScene" uid="uid://2e66nf3xosom" path="res://Scenes/winner_screen.tscn" id="11_gdcq7"]
 [ext_resource type="PackedScene" uid="uid://batr2snc4bpc5" path="res://Scenes/roll_for_first.tscn" id="12_jjawl"]
 [ext_resource type="AudioStream" uid="uid://clqf2fbmupef5" path="res://sounds/board game sound.wav" id="13_iopki"]
@@ -117,9 +118,10 @@ position = Vector2(128, 288)
 scale = Vector2(2, 2)
 texture = ExtResource("3_bw44p")
 
-[node name="Camera2D" type="Camera2D" parent="PlayerOne"]
-enabled = false
-position_smoothing_enabled = true
+[node name="Camera" parent="PlayerOne" instance=ExtResource("9_p132e")]
+
+[node name="BottomRight" parent="PlayerOne/Camera/Node" index="1"]
+position = Vector2(1275, 728)
 
 [node name="PlayerTwo" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -127,9 +129,10 @@ position = Vector2(128, 352)
 scale = Vector2(2, 2)
 texture = ExtResource("4_ibtm6")
 
-[node name="Camera2D" type="Camera2D" parent="PlayerTwo"]
-enabled = false
-position_smoothing_enabled = true
+[node name="Camera" parent="PlayerTwo" instance=ExtResource("9_p132e")]
+
+[node name="BottomRight" parent="PlayerTwo/Camera/Node" index="1"]
+position = Vector2(1280, 728)
 
 [node name="EndTurnTimer" type="Timer" parent="."]
 one_shot = true
@@ -224,8 +227,7 @@ stream = ExtResource("14_ky3nl")
 volume_db = -10.0
 autoplay = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-position_smoothing_enabled = true
-
 [connection signal="timeout" from="EndTurnTimer" to="." method="_on_turn_ended"]
+
+[editable path="PlayerOne/Camera"]
+[editable path="PlayerTwo/Camera"]

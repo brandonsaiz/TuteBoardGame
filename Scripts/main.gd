@@ -4,8 +4,8 @@ extends Node2D
 @onready var dice = $Dice as Dice
 @onready var player_one = $PlayerOne as Sprite2D
 @onready var player_two = $PlayerTwo as Sprite2D
-@onready var camera_one= $PlayerOne/Camera2D
-@onready var camera_two = $PlayerTwo/Camera2D
+@onready var camera_one= $PlayerOne/Camera as PlayerCamera
+@onready var camera_two = $PlayerTwo/Camera as PlayerCamera
 
 @onready var end_turn_timer = $EndTurnTimer
 @onready var movement_timer = $MovementTimer
@@ -18,7 +18,6 @@ extends Node2D
 @onready var winner_screen = $"CanvasLayer/Winner Screen" as WinnerScreen
 @onready var roll_for_first = $"Roll For First" as RollForFirst
 @onready var piece_sound = $PieceSound
-@onready var camera = $Camera2D
 
 @export var debug: bool = false
 @export var debug_dice_roll: int = 6
@@ -50,6 +49,7 @@ func _ready() -> void:
 	player_two.global_position = game_board_spots[0].global_position + token_offset
 	score_one_label.text = score_words_one + str(p_one_score)
 	score_two_label.text = score_words_two + str(p_two_score)
+	camera_one.enabled = true
 
 func _input(_event) -> void:
 	if Input.is_action_just_pressed("ui_accept") && roll_ready:
@@ -71,14 +71,11 @@ func move_player():
 	var spaces = 0
 	var landing_space
 	var final_spot
-	camera.enabled = false
 	if p_one_turn: 
-		camera_one.enabled = true
 		current_player = player_one
 		token_offset = -1 * abs(token_offset)
 		final_spot = p_one_spot + result
 	else: 
-		camera_two.enabled = true
 		current_player = player_two
 		token_offset = abs(token_offset)
 		final_spot = p_two_spot + result
@@ -199,20 +196,23 @@ func _end_game():
 	winner_screen.set_winner(winner)
 		
 func _on_turn_ended():
-	camera_one.enabled = false
-	camera_two.enabled = false
-	camera.enabled = true
 	if p_one_done and p_two_done:
 		_end_game()
 		return
 	roll_ready = true
+	camera_one.enabled = false
+	camera_two.enabled = false
 	if player_is_frozen():
 		print("one of them is done")
 		p_one_turn = !p_one_done
 	else:
 		p_one_turn = !p_one_turn
-	if p_one_turn: action_label.text = "Roll Player One"
-	else: action_label.text = "Roll Player Two"
+	if p_one_turn: 
+		camera_one.enabled = true
+		action_label.text = "Roll Player One"
+	else: 
+		camera_two.enabled = true
+		action_label.text = "Roll Player Two"
 	action_label_ctr.visible = true
 	
 func _roll_complete():
