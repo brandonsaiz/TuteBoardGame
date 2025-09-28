@@ -110,3 +110,9 @@ script = ExtResource("3_diml4")
 position = Vector2(258.015, 143.09)
 script = ExtResource("3_diml4")
 type = 4
+
+[node name="Camera2D" parent="PlayerOne" index="0"]
+position_smoothing_enabled = true
+
+[node name="Camera2D" parent="PlayerTwo" index="0"]
+position_smoothing_enabled = true

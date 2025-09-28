@@ -119,6 +119,7 @@ texture = ExtResource("3_bw44p")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerOne"]
 enabled = false
+position_smoothing_enabled = true
 
 [node name="PlayerTwo" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -128,6 +129,7 @@ texture = ExtResource("4_ibtm6")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerTwo"]
 enabled = false
+position_smoothing_enabled = true
 
 [node name="EndTurnTimer" type="Timer" parent="."]
 one_shot = true
