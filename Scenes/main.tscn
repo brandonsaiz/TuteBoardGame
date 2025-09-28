@@ -108,10 +108,6 @@ position = Vector2(-257.511, 106.685)
 script = ExtResource("3_6i2ct")
 type = 4
 
-[node name="Dice" parent="." instance=ExtResource("2_535dj")]
-position = Vector2(1024.37, 142.113)
-scale = Vector2(1.98438, 1.97778)
-
 [node name="PlayerOne" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(128, 288)
@@ -146,6 +142,10 @@ wait_time = 1.8
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Dice" parent="CanvasLayer" instance=ExtResource("2_535dj")]
+position = Vector2(1025.37, 142.113)
+scale = Vector2(1.98438, 1.97778)
 
 [node name="ActionLabelCtr" type="PanelContainer" parent="CanvasLayer"]
 visible = false

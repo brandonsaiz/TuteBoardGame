@@ -1,11 +1,12 @@
 extends Node2D
 
 @onready var game_board = $GameBoard
-@onready var dice = $Dice as Dice
+@onready var dice = $CanvasLayer/Dice as Dice
 @onready var player_one = $PlayerOne as Sprite2D
 @onready var player_two = $PlayerTwo as Sprite2D
 @onready var camera_one= $PlayerOne/Camera as PlayerCamera
 @onready var camera_two = $PlayerTwo/Camera as PlayerCamera
+@onready var canvas_layer = $CanvasLayer
 
 @onready var end_turn_timer = $EndTurnTimer
 @onready var movement_timer = $MovementTimer
@@ -162,7 +163,7 @@ func ask_question():
 		var question = question_box.instantiate()
 		print(str(question))
 		question.connect("answered", _on_question_answered)
-		add_child(question)
+		canvas_layer.add_child(question)
 		
 func update_score():
 	score_one_label.text = score_words_one + str(p_one_score)
