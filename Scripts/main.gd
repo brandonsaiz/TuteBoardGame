@@ -4,6 +4,9 @@ extends Node2D
 @onready var dice = $Dice as Dice
 @onready var player_one = $PlayerOne as Sprite2D
 @onready var player_two = $PlayerTwo as Sprite2D
+@onready var camera_one= $PlayerOne/Camera2D
+@onready var camera_two = $PlayerTwo/Camera2D
+
 @onready var end_turn_timer = $EndTurnTimer
 @onready var movement_timer = $MovementTimer
 @onready var action_timer = $ActionTimer
@@ -15,8 +18,12 @@ extends Node2D
 @onready var winner_screen = $"CanvasLayer/Winner Screen" as WinnerScreen
 @onready var roll_for_first = $"Roll For First" as RollForFirst
 @onready var piece_sound = $PieceSound
+@onready var camera = $Camera2D
 
 @export var debug: bool = false
+@export var debug_dice_roll: int = 6
+@export var debug_piece_speed: float = 0.001
+
 @export var question_boxes : Array[PackedScene]
 @export var token_offset : Vector2 = Vector2(0.0, 32.0)
 
@@ -54,7 +61,7 @@ func _process(_delta) -> void:
 		roll_complete = false
 ############## DEBUG MOVEMENT ##############
 		if debug:
-			result = 6
+			result = debug_dice_roll
 ############################################
 		print(str(result))
 		move_player()
@@ -64,11 +71,14 @@ func move_player():
 	var spaces = 0
 	var landing_space
 	var final_spot
+	camera.enabled = false
 	if p_one_turn: 
+		camera_one.enabled = true
 		current_player = player_one
 		token_offset = -1 * abs(token_offset)
 		final_spot = p_one_spot + result
 	else: 
+		camera_two.enabled = true
 		current_player = player_two
 		token_offset = abs(token_offset)
 		final_spot = p_two_spot + result
@@ -95,7 +105,7 @@ func move_player():
 		var token_speed = 0.8
 		############### DEBUG MOVE SPEED#####################
 		if debug:
-			token_speed = 0.001
+			token_speed = debug_piece_speed
 		#####################################################
 		var tween = create_tween()
 		tween.tween_property(current_player, "global_position",\
@@ -143,6 +153,8 @@ func move_player():
 			end_turn_timer.start()
 #			print("p1 done: " + str(p_one_done))
 #			print("p2 done: " + str(p_two_done))
+func player_is_frozen() -> bool:
+	return p_one_done or p_two_done
 			
 func ask_question():
 		action_label.text = "Answer the Question!"
@@ -187,11 +199,18 @@ func _end_game():
 	winner_screen.set_winner(winner)
 		
 func _on_turn_ended():
+	camera_one.enabled = false
+	camera_two.enabled = false
+	camera.enabled = true
 	if p_one_done and p_two_done:
 		_end_game()
 		return
 	roll_ready = true
-	p_one_turn = !p_one_turn
+	if player_is_frozen():
+		print("one of them is done")
+		p_one_turn = !p_one_done
+	else:
+		p_one_turn = !p_one_turn
 	if p_one_turn: action_label.text = "Roll Player One"
 	else: action_label.text = "Roll Player Two"
 	action_label_ctr.visible = true

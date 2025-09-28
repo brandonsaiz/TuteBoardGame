@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://bca6nqafd8igc"]
+
+[ext_resource type="PackedScene" uid="uid://5tr5oveevonc" path="res://Scenes/main.tscn" id="1_ibsww"]
+[ext_resource type="Texture2D" uid="uid://cawvpdf0xnm2y" path="res://Art/board2.png" id="2_l6pe2"]
+[ext_resource type="Script" path="res://Scripts/Space.gd" id="3_diml4"]
+
+[node name="Main2" instance=ExtResource("1_ibsww")]
+debug = true
+debug_dice_roll = 12
+
+[node name="GameBoard" parent="." index="0"]
+position = Vector2(639, 536)
+texture = ExtResource("2_l6pe2")
+
+[node name="Space0" parent="GameBoard" index="0"]
+position = Vector2(-257.511, -111.741)
+
+[node name="Space1" parent="GameBoard" index="1"]
+position = Vector2(-193.511, -111.741)
+
+[node name="Space2" parent="GameBoard" index="2"]
+position = Vector2(-127.071, -113.876)
+
+[node name="Space3" parent="GameBoard" index="3"]
+position = Vector2(-62.5663, -113.876)
+
+[node name="Space4" parent="GameBoard" index="4"]
+position = Vector2(1.93744, -113.876)
+
+[node name="Space5" parent="GameBoard" index="5"]
+position = Vector2(66.4412, -113.876)
+
+[node name="Space6" parent="GameBoard" index="6"]
+position = Vector2(130.944, -113.876)
+
+[node name="Space7" parent="GameBoard" index="7"]
+position = Vector2(195.448, -109.831)
+
+[node name="Space8" parent="GameBoard" index="8"]
+position = Vector2(259.952, -109.831)
+
+[node name="Space9" parent="GameBoard" index="9"]
+position = Vector2(259.952, -45.1123)
+
+[node name="Space10" parent="GameBoard" index="10"]
+position = Vector2(259.952, 19.6065)
+
+[node name="Space11" parent="GameBoard" index="11"]
+position = Vector2(191.416, 19.6067)
+
+[node name="Space12" parent="GameBoard" index="12"]
+position = Vector2(126.913, 19.6067)
+
+[node name="Space13" parent="GameBoard" index="13"]
+position = Vector2(62.4091, 19.6067)
+
+[node name="Space14" parent="GameBoard" index="14"]
+position = Vector2(-2.09457, 19.6067)
+
+[node name="Space15" parent="GameBoard" index="15"]
+position = Vector2(-66.5984, 19.6067)
+
+[node name="Space16" parent="GameBoard" index="16"]
+position = Vector2(-131.103, 19.6067)
+
+[node name="Space17" parent="GameBoard" index="17"]
+position = Vector2(-195.606, 19.6067)
+
+[node name="Space18" parent="GameBoard" index="18"]
+position = Vector2(-257.511, 19.7191)
+type = 0
+
+[node name="Space19" type="Marker2D" parent="GameBoard" index="19"]
+position = Vector2(-257.511, 82.4156)
+script = ExtResource("3_diml4")
+
+[node name="Space20" type="Marker2D" parent="GameBoard" index="20"]
+position = Vector2(-257.511, 143.09)
+script = ExtResource("3_diml4")
+
+[node name="Space21" type="Marker2D" parent="GameBoard" index="21"]
+position = Vector2(-193.511, 143.09)
+script = ExtResource("3_diml4")
+
+[node name="Space22" type="Marker2D" parent="GameBoard" index="22"]
+position = Vector2(-131.023, 143.09)
+script = ExtResource("3_diml4")
+
+[node name="Space23" type="Marker2D" parent="GameBoard" index="23"]
+position = Vector2(-64.5038, 143.09)
+script = ExtResource("3_diml4")
+
+[node name="Space24" type="Marker2D" parent="GameBoard" index="24"]
+position = Vector2(1.52588e-05, 143.09)
+script = ExtResource("3_diml4")
+
+[node name="Space25" type="Marker2D" parent="GameBoard" index="25"]
+position = Vector2(60.4723, 143.09)
+script = ExtResource("3_diml4")
+
+[node name="Space26" type="Marker2D" parent="GameBoard" index="26"]
+position = Vector2(124.976, 143.09)
+script = ExtResource("3_diml4")
+
+[node name="Space27" type="Marker2D" parent="GameBoard" index="27"]
+position = Vector2(191.496, 143.09)
+script = ExtResource("3_diml4")
+
+[node name="Space28" type="Marker2D" parent="GameBoard" index="28"]
+position = Vector2(258.015, 143.09)
+script = ExtResource("3_diml4")
+type = 4

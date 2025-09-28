@@ -18,7 +18,7 @@
 [node name="Main" type="Node2D"]
 position = Vector2(1, 0)
 script = ExtResource("1_ccjf1")
-debug = true
+debug_dice_roll = 1
 question_boxes = Array[PackedScene]([ExtResource("2_0t1mw"), ExtResource("3_isfie"), ExtResource("4_gdupf")])
 
 [node name="GameBoard" type="Sprite2D" parent="."]
@@ -117,11 +117,17 @@ position = Vector2(128, 288)
 scale = Vector2(2, 2)
 texture = ExtResource("3_bw44p")
 
+[node name="Camera2D" type="Camera2D" parent="PlayerOne"]
+enabled = false
+
 [node name="PlayerTwo" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(128, 352)
 scale = Vector2(2, 2)
 texture = ExtResource("4_ibtm6")
+
+[node name="Camera2D" type="Camera2D" parent="PlayerTwo"]
+enabled = false
 
 [node name="EndTurnTimer" type="Timer" parent="."]
 one_shot = true
@@ -215,5 +221,9 @@ stream = ExtResource("13_iopki")
 stream = ExtResource("14_ky3nl")
 volume_db = -10.0
 autoplay = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+position_smoothing_enabled = true
 
 [connection signal="timeout" from="EndTurnTimer" to="." method="_on_turn_ended"]
