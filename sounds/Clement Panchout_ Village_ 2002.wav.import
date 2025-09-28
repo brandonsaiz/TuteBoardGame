@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://6ap7dednkpgp"
+path="res://.godot/imported/Clement Panchout_ Village_ 2002.wav-425835ac52c6769e8a4f7a4e712d1f4d.sample"
+
+[deps]
+
+source_file="res://sounds/Clement Panchout_ Village_ 2002.wav"
+dest_files=["res://.godot/imported/Clement Panchout_ Village_ 2002.wav-425835ac52c6769e8a4f7a4e712d1f4d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -86,6 +86,7 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_laosa")
+volume_db = -30.0
 pitch_scale = 0.5
 
 [connection signal="timeout" from="rollTimer" to="." method="_on_roll_timer_timeout"]

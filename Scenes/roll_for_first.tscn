@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://batr2snc4bpc5"]
+[gd_scene load_steps=8 format=3 uid="uid://batr2snc4bpc5"]
 
 [ext_resource type="Theme" uid="uid://dkeqhsnkx3w0s" path="res://Art/DefaultTheme.tres" id="1_cqp24"]
 [ext_resource type="Texture2D" uid="uid://bfro3nt61ljdl" path="res://Art/both.png" id="2_0qw4u"]
 [ext_resource type="Script" path="res://Scripts/roll_for_first.gd" id="2_a4txe"]
+[ext_resource type="AudioStream" uid="uid://d2tm8a7srb8le" path="res://sounds/board game question dice.wav" id="4_gba5e"]
 
 [sub_resource type="Animation" id="Animation_r4sdi"]
-length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -34,6 +34,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wpial"]
@@ -84,6 +96,10 @@ libraries = {
 [node name="AnimTimer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gba5e")
+pitch_scale = 1.5
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="AnimTimer" to="." method="_on_anim_timer_timeout"]
