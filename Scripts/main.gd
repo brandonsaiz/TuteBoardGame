@@ -6,6 +6,8 @@ extends Node2D
 @onready var player_two = $PlayerTwo as Sprite2D
 @onready var camera_one= $PlayerOne/Camera as PlayerCamera
 @onready var camera_two = $PlayerTwo/Camera as PlayerCamera
+@onready var transition_camera = $TransitionCamera as TransitionCamera
+
 @onready var canvas_layer = $CanvasLayer
 
 @onready var end_turn_timer = $EndTurnTimer
@@ -17,7 +19,8 @@ extends Node2D
 @onready var score_one_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreOneLabel
 @onready var score_two_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
 @onready var winner_screen = $"CanvasLayer/Winner Screen" as WinnerScreen
-@onready var roll_for_first = $"Roll For First" as RollForFirst
+@onready var roll_for_first = $"CanvasLayer/Roll For First"
+
 @onready var piece_sound = $PieceSound
 
 @export var debug: bool = false
@@ -50,7 +53,6 @@ func _ready() -> void:
 	player_two.global_position = game_board_spots[0].global_position + token_offset
 	score_one_label.text = score_words_one + str(p_one_score)
 	score_two_label.text = score_words_two + str(p_two_score)
-	camera_one.enabled = true
 
 func _input(_event) -> void:
 	if Input.is_action_just_pressed("ui_accept") && roll_ready:
@@ -187,6 +189,7 @@ func _start_game(piece: String):
 	roll_for_first.call_deferred("queue_free")
 	action_label_ctr.visible = true
 	roll_ready = true
+	camera_one.enabled = true
 	
 func _end_game():
 	if p_one_score == p_two_score:
@@ -201,18 +204,18 @@ func _on_turn_ended():
 		_end_game()
 		return
 	roll_ready = true
-	camera_one.enabled = false
-	camera_two.enabled = false
 	if player_is_frozen():
 		print("one of them is done")
 		p_one_turn = !p_one_done
 	else:
 		p_one_turn = !p_one_turn
 	if p_one_turn: 
-		camera_one.enabled = true
+		if !camera_one.enabled:
+			transition_camera.transition(camera_two, camera_one)
 		action_label.text = "Roll Player One"
 	else: 
-		camera_two.enabled = true
+		if !camera_two.enabled:
+			transition_camera.transition(camera_one, camera_two)
 		action_label.text = "Roll Player Two"
 	action_label_ctr.visible = true
 	

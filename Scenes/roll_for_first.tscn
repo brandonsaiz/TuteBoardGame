@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://batr2snc4bpc5"]
+[gd_scene load_steps=9 format=3 uid="uid://batr2snc4bpc5"]
 
 [ext_resource type="Theme" uid="uid://dkeqhsnkx3w0s" path="res://Art/DefaultTheme.tres" id="1_cqp24"]
 [ext_resource type="Texture2D" uid="uid://bfro3nt61ljdl" path="res://Art/both.png" id="2_0qw4u"]
 [ext_resource type="Script" path="res://Scripts/roll_for_first.gd" id="2_a4txe"]
 [ext_resource type="AudioStream" uid="uid://d2tm8a7srb8le" path="res://sounds/board game question dice.wav" id="4_gba5e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0nh6f"]
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 
 [sub_resource type="Animation" id="Animation_r4sdi"]
 tracks/0/type = "value"
@@ -68,6 +74,8 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+theme = ExtResource("1_cqp24")
+theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -85,6 +93,9 @@ flip_h = true
 [node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_cqp24")
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0nh6f")
 text = "Click to select player one!"
 flat = true
 

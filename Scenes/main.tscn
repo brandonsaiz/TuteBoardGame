@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://5tr5oveevonc"]
+[gd_scene load_steps=17 format=3 uid="uid://5tr5oveevonc"]
 
 [ext_resource type="Texture2D" uid="uid://b3aqbfwdc6tly" path="res://Art/board with question marks.png" id="1_4nj3e"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_ccjf1"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://batr2snc4bpc5" path="res://Scenes/roll_for_first.tscn" id="12_jjawl"]
 [ext_resource type="AudioStream" uid="uid://clqf2fbmupef5" path="res://sounds/board game sound.wav" id="13_iopki"]
 [ext_resource type="AudioStream" uid="uid://6ap7dednkpgp" path="res://sounds/Clement Panchout_ Village_ 2002.wav" id="14_ky3nl"]
+[ext_resource type="Script" path="res://Scripts/transition_camera.gd" id="16_1qd3a"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(1, 0)
@@ -213,11 +214,11 @@ layout_mode = 2
 [node name="ScoreTwoLabel" type="Label" parent="CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Roll For First" parent="." instance=ExtResource("12_jjawl")]
-offset_left = 7.0
-offset_top = 9.0
-offset_right = 1274.0
-offset_bottom = 249.0
+[node name="Roll For First" parent="CanvasLayer" instance=ExtResource("12_jjawl")]
+offset_left = 392.0
+offset_top = 32.0
+offset_right = -480.0
+offset_bottom = -472.0
 
 [node name="PieceSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_iopki")
@@ -227,7 +228,15 @@ stream = ExtResource("14_ky3nl")
 volume_db = -10.0
 autoplay = true
 
+[node name="TransitionCamera" parent="." instance=ExtResource("9_p132e")]
+script = ExtResource("16_1qd3a")
+transition_speed = 1.0
+
+[node name="BottomRight" parent="TransitionCamera/Node" index="1"]
+position = Vector2(1280, 721)
+
 [connection signal="timeout" from="EndTurnTimer" to="." method="_on_turn_ended"]
 
 [editable path="PlayerOne/Camera"]
 [editable path="PlayerTwo/Camera"]
+[editable path="TransitionCamera"]
