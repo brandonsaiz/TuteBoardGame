@@ -17,8 +17,9 @@ extends Node2D
 @onready var score_one_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreOneLabel
 @onready var score_two_label = $CanvasLayer/ScoreCtr/MarginContainer/VBoxContainer/ScoreTwoLabel
 @onready var winner_screen = $"CanvasLayer/Winner Screen" as WinnerScreen
-@onready var roll_for_first = $"Roll For First" as RollForFirst
+@onready var roll_for_first = $"CanvasLayer/Roll For First"
 @onready var piece_sound = $PieceSound
+@onready var transition_camera = $TransitionCamera
 
 @export var debug: bool = false
 @export var debug_dice_roll: int = 6
@@ -175,6 +176,7 @@ func _start_game(piece: String):
 	var pink_tex = load("res://Art/pink piece.png")
 	var blue_tex = load("res://Art/blue piece.png")	
 	if piece == "pink":
+		winner_screen.flip_players()
 		player_one.texture = pink_tex
 		player_two.texture = blue_tex
 		score_words_one = "Pink - Player One Score: "

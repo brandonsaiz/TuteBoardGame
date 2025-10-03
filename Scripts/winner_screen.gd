@@ -8,6 +8,10 @@ var player_one_file: String = "res://Art/blue piece.png"
 var player_two_file: String = "res://Art/pink piece.png"
 var both_file: String = "res://Art/both.png"
 
+func flip_players():
+	var tmp = player_two_file
+	player_one_file = player_two_file
+	player_two_file = player_one_file
 func change_text(string: String):
 	label.text = string
 
