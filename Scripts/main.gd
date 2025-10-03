@@ -201,18 +201,14 @@ func _on_turn_ended():
 		_end_game()
 		return
 	roll_ready = true
-	camera_one.enabled = false
-	camera_two.enabled = false
 	if player_is_frozen():
 		print("one of them is done")
 		p_one_turn = !p_one_done
 	else:
 		p_one_turn = !p_one_turn
 	if p_one_turn: 
-		camera_one.enabled = true
 		action_label.text = "Roll Player One"
 	else: 
-		camera_two.enabled = true
 		action_label.text = "Roll Player Two"
 	action_label_ctr.visible = true
 	
