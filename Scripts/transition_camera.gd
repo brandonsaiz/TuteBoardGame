@@ -27,7 +27,7 @@ func transition(from: Camera2D, to: Camera2D):
 	await(tween.finished)
 	to.enabled = true
 	enabled = false
-#	transitioning = false
+	transitioning = false
 #	print("mine: " + str(global_position)\
 #			+ ", from: " +str(from.global_position)\
 #			+ ", to: " + str(to.global_position))
