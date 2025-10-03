@@ -60,14 +60,13 @@ func _input(_event) -> void:
 		roll_ready = false
 
 func _process(_delta) -> void:
-	if !transition_camera.transitioning: _check_cameras()
 	if roll_complete:
 		roll_complete = false
 ############## DEBUG MOVEMENT ##############
 		if debug:
 			result = debug_dice_roll
 ############################################
-#		print(str(result))
+		print(str(result))
 		move_player()
 		
 func move_player():
@@ -160,11 +159,11 @@ func player_is_frozen() -> bool:
 func ask_question():
 		action_label.text = "Answer the Question!"
 		question_boxes.shuffle()
-#		print("size of question_boxes: " + str(question_boxes.size()))
+		print("size of question_boxes: " + str(question_boxes.size()))
 		var question_box = question_boxes.front()
-#		print(str(question_box))
+		print(str(question_box))
 		var question = question_box.instantiate()
-#		print(str(question))
+		print(str(question))
 		question.connect("answered", _on_question_answered)
 		canvas_layer.add_child(question)
 		
@@ -173,7 +172,7 @@ func update_score():
 	score_two_label.text = score_words_two + str(p_two_score)
 
 func _start_game(piece: String):
-#	print(piece + " GOES FIRST!")
+	print(piece + " GOES FIRST!")
 	action_timer.start()
 	var pink_tex = load("res://Art/pink piece.png")
 	var blue_tex = load("res://Art/blue piece.png")	
@@ -206,7 +205,7 @@ func _on_turn_ended():
 		return
 	roll_ready = true
 	if player_is_frozen():
-#		print("one of them is done")
+		print("one of them is done")
 		p_one_turn = !p_one_done
 	else:
 		p_one_turn = !p_one_turn
@@ -247,17 +246,3 @@ func _on_question_answered(correct : bool):
 		await action_timer.timeout
 	end_turn_timer.start()
 	
-func _check_cameras():
-	print("p_one turn: " + str(p_one_turn))
-	if p_one_turn && !camera_one.enabled:
-		print("check cam 2")
-		if camera_two.enabled:
-			print("trans 2 -> 1")
-			transition_camera.transition(camera_two, camera_one)
-		else: camera_one.enabled = true
-	if !p_one_turn && !camera_two.enabled:
-		print("check cam 1")
-		if camera_one.enabled:
-			print("trans 2 -> 1")
-			transition_camera.transition(camera_one, camera_two)
-		else: camera_two.enabled = true

@@ -20,8 +20,7 @@
 [node name="Main" type="Node2D"]
 position = Vector2(1, 0)
 script = ExtResource("1_ccjf1")
-debug = true
-debug_dice_roll = 8
+debug_dice_roll = 1
 question_boxes = Array[PackedScene]([ExtResource("2_0t1mw"), ExtResource("3_isfie"), ExtResource("4_gdupf")])
 
 [node name="GameBoard" type="Sprite2D" parent="."]
@@ -117,8 +116,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_bw44p")
 
 [node name="Camera" parent="PlayerOne" instance=ExtResource("9_p132e")]
-enabled = true
-zoom = Vector2(1.5, 1.5)
 
 [node name="BottomRight" parent="PlayerOne/Camera/Node" index="1"]
 position = Vector2(1275, 728)
@@ -130,7 +127,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_ibtm6")
 
 [node name="Camera" parent="PlayerTwo" instance=ExtResource("9_p132e")]
-zoom = Vector2(1.5, 1.5)
 
 [node name="BottomRight" parent="PlayerTwo/Camera/Node" index="1"]
 position = Vector2(1280, 728)
