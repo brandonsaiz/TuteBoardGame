@@ -15,13 +15,13 @@ func _ready():
 
 func transition(from : Camera2D, to: Camera2D):
 	if transitioning: return
-	transitioning = true
 	global_position = from.global_position
+	transitioning = true
 	enabled = true
 	from.enabled = false	
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", to.global_position, transition_lag)
 	await tween.finished
-	enabled = false
 	to.enabled = true	
+	enabled = false
 	transitioning = false

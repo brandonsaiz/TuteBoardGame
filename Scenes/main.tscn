@@ -117,6 +117,8 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_bw44p")
 
 [node name="Camera" parent="PlayerOne" instance=ExtResource("9_p132e")]
+enabled = true
+zoom = Vector2(1.5, 1.5)
 
 [node name="BottomRight" parent="PlayerOne/Camera/Node" index="1"]
 position = Vector2(1275, 728)
@@ -128,6 +130,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_ibtm6")
 
 [node name="Camera" parent="PlayerTwo" instance=ExtResource("9_p132e")]
+zoom = Vector2(1.5, 1.5)
 
 [node name="BottomRight" parent="PlayerTwo/Camera/Node" index="1"]
 position = Vector2(1280, 728)
@@ -230,8 +233,13 @@ volume_db = -10.0
 autoplay = true
 
 [node name="TransitionCamera" parent="." instance=ExtResource("9_p132e")]
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = false
 script = ExtResource("16_0j8ak")
 transition_lag = 3.0
+
+[node name="BottomRight" parent="TransitionCamera/Node" index="1"]
+position = Vector2(1275, 728)
 
 [node name="Sprite2D" type="Sprite2D" parent="TransitionCamera"]
 scale = Vector2(0.3, 0.3)
@@ -241,3 +249,4 @@ texture = ExtResource("17_ks2t5")
 
 [editable path="PlayerOne/Camera"]
 [editable path="PlayerTwo/Camera"]
+[editable path="TransitionCamera"]

@@ -19,7 +19,7 @@ extends Node2D
 @onready var winner_screen = $"CanvasLayer/Winner Screen" as WinnerScreen
 @onready var roll_for_first = $"CanvasLayer/Roll For First"
 @onready var piece_sound = $PieceSound
-@onready var transition_camera = $TransitionCamera
+@onready var transition_camera = $TransitionCamera as TransitionCamera
 
 @export var debug: bool = false
 @export var debug_dice_roll: int = 6
@@ -210,8 +210,12 @@ func _on_turn_ended():
 		p_one_turn = !p_one_turn
 	if p_one_turn: 
 		action_label.text = "Roll Player One"
+		if !camera_one.enabled: 
+			await transition_camera.transition(camera_two, camera_one)
 	else: 
 		action_label.text = "Roll Player Two"
+		if !camera_two.enabled: 
+			await transition_camera.transition(camera_one, camera_two)
 	action_label_ctr.visible = true
 	
 func _roll_complete():
