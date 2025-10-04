@@ -5,7 +5,6 @@
 [ext_resource type="Script" path="res://Scripts/Space.gd" id="3_diml4"]
 
 [node name="Main2" instance=ExtResource("1_ibsww")]
-debug = true
 debug_dice_roll = 12
 
 [node name="GameBoard" parent="." index="0"]
@@ -116,9 +115,6 @@ position = Vector2(1274, 1074)
 
 [node name="BottomRight" parent="PlayerTwo/Camera/Node" index="1"]
 position = Vector2(1279, 1074)
-
-[node name="TransitionCamera" parent="." index="10"]
-transition_lag = 3.0
 
 [node name="BottomRight" parent="TransitionCamera/Node" index="1"]
 position = Vector2(1272, 1072)

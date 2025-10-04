@@ -215,7 +215,7 @@ func _on_turn_ended():
 	else: 
 		action_label.text = "Roll Player Two"
 		if !camera_two.enabled: 
-			await transition_camera.transition(camera_one, camera_two)
+			await transition_camera.tranition(camera_one, camera_two)
 	action_label_ctr.visible = true
 	
 func _roll_complete():

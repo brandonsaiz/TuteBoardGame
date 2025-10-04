@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://5tr5oveevonc"]
+[gd_scene load_steps=17 format=3 uid="uid://5tr5oveevonc"]
 
 [ext_resource type="Texture2D" uid="uid://b3aqbfwdc6tly" path="res://Art/board with question marks.png" id="1_4nj3e"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_ccjf1"]
@@ -16,7 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://clqf2fbmupef5" path="res://sounds/board game sound.wav" id="13_iopki"]
 [ext_resource type="AudioStream" uid="uid://6ap7dednkpgp" path="res://sounds/Clement Panchout_ Village_ 2002.wav" id="14_ky3nl"]
 [ext_resource type="Script" path="res://Scripts/transition_camera.gd" id="16_0j8ak"]
-[ext_resource type="Texture2D" uid="uid://bqnfnvlgcpqxo" path="res://Art/icon.svg" id="17_ks2t5"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(1, 0)
@@ -240,10 +239,6 @@ transition_lag = 3.0
 
 [node name="BottomRight" parent="TransitionCamera/Node" index="1"]
 position = Vector2(1275, 728)
-
-[node name="Sprite2D" type="Sprite2D" parent="TransitionCamera"]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("17_ks2t5")
 
 [connection signal="timeout" from="EndTurnTimer" to="." method="_on_turn_ended"]
 
