@@ -24,9 +24,11 @@ extends Node2D
 @export var debug: bool = false
 @export var debug_dice_roll: int = 6
 @export var debug_piece_speed: float = 0.001
+@export var level: int = 1
 
 @export var question_boxes : Array[PackedScene]
 @export var token_offset : Vector2 = Vector2(0.0, 32.0)
+
 
 var game_board_spots : Array 
 var p_one_turn : bool = true
@@ -197,6 +199,7 @@ func _end_game():
 		return
 	var winner: bool = p_one_score > p_two_score
 	winner_screen.set_winner(winner)
+	SceneManager.board_completed(level)
 		
 func _on_turn_ended():
 	if p_one_done and p_two_done:
@@ -215,7 +218,7 @@ func _on_turn_ended():
 	else: 
 		action_label.text = "Roll Player Two"
 		if !camera_two.enabled: 
-			await transition_camera.tranition(camera_one, camera_two)
+			await transition_camera.transition(camera_one, camera_two)
 	action_label_ctr.visible = true
 	
 func _roll_complete():

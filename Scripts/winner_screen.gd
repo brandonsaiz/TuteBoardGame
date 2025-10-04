@@ -30,4 +30,4 @@ func set_winner(player_one: bool) -> void:
 
 
 func _on_button_button_up():
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://Scenes/level_select.tscn")

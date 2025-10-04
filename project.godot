@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="TuteBoardGame"
-run/main_scene="res://Scenes/main.tscn"
+run/main_scene="res://Scenes/level_select.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://Art/icon.svg"
 
 [autoload]
 
 SpaceType="*res://Scripts/space_type.gd"
+SceneManager="*res://Scripts/scene_manager.gd"
 
 [display]
 

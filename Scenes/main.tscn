@@ -235,7 +235,7 @@ autoplay = true
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = false
 script = ExtResource("16_0j8ak")
-transition_lag = 3.0
+transition_lag = 1.2
 
 [node name="BottomRight" parent="TransitionCamera/Node" index="1"]
 position = Vector2(1275, 728)
